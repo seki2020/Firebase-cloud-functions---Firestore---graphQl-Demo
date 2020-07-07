@@ -14,7 +14,16 @@ const { ApolloServer } = require("apollo-server-express");
 const app = express();
 
 //Create graphql server
-const server = new ApolloServer({ typeDefs, resolvers, playground: true });
-server.applyMiddleware({ app, path: "/", cors: true });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  playground: true,
+  introspection: true,
+});
+server.applyMiddleware({
+  app,
+  path: "/",
+  cors: true,
+});
 
 exports.graphql = functions.https.onRequest(app);
